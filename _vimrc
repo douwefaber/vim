@@ -247,5 +247,5 @@ inoremap ( ()<Esc>i
 
 
 " commit the vimrc to github
-map <C-F11> :Git commit -a<cr>
+map <C-F11> :Git commit -a -m"commit"<cr>
 
