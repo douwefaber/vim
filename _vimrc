@@ -19,7 +19,7 @@ Bundle 'gmarik/vundle'
 "-----------------------------------------------------------------------------
 Bundle 'msanders/snipmate.vim'
 Bundle 'scrooloose/nerdtree'
-" Bundle 'OmniCppComplete'
+Bundle 'OmniCppComplete'
 Bundle 'kien/ctrlp.vim'
 Bundle 'derekwyatt/vim-protodef'
 Bundle 'derekwyatt/vim-fswitch'
@@ -212,7 +212,7 @@ set selectmode=key
 " set whichwrap=b,s,<,>,[,]
 set window=48
 " Show the line numbers
-set number
+" set number
 
 " Set the invisible characters
 set list
@@ -230,6 +230,10 @@ map <C-l> <C-w>l
 " let Tlist_Ctags_Cmd = "/usr/bin/ctags"
 let Tlist_WinWidth = 50
 map <F4> :TlistToggle<cr>
+" load the vimrc file
+map <F11> :e $home/vim/_vimrc<cr>
+"" reload the vimrc once it's saved
+au! BufWritePost $home/vim/_vimrc source $home/vim/_vimrc 
 " filetype specific stuff
 " C / C++
 " au FileType python map <buffer> <leader>1 /class
@@ -242,4 +246,6 @@ inoremap { {}<Esc>i
 inoremap ( ()<Esc>i
 
 
+" commit the vimrc to github
+map <C-F11> :Git commit -a<cr>
 
