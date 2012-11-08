@@ -236,10 +236,12 @@ au! BufWritePost $home/vim/_vimrc source $home/vim/_vimrc
 
 " OmniCppComplete needs a ctags database
 map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
-" 
-inoremap [ []<Esc>i
-inoremap { {}<Esc>i
-inoremap ( ()<Esc>i
+"
+" Automatic closing braces.
+" Nice that it can be done but they're anoying.
+" inoremap [ []<Esc>i
+" inoremap { {}<Esc>i
+" inoremap ( ()<Esc>i
 
 
 
