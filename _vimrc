@@ -2,11 +2,6 @@
 "-----------------------------------------------------------------------------
 " Manage plugins through Vundle
 "-----------------------------------------------------------------------------
-" On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
-" across (heterogeneous) systems easier.
-" if has('win32') || has('win64')
-"   set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
-" endif
 
 filetype off
 set rtp+=~/.vim/bundle/vundle/
@@ -41,7 +36,7 @@ set nocp
 
 " Maximize the window on startup
 if has("gui_running")
-  autocmd GUIEnter * simalt ~x
+  autocmd GUIEnter * set lines=500 columns=500
 endif
 set colorcolumn=80 " set a colored column on this position
 
@@ -109,9 +104,9 @@ set history=100
 " These commands open folds
 set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo
 
-" When the page starts to scroll, keep the cursor 8 lines from the top and 8
+" When the page starts to scroll, keep the cursor n lines from the top and n
 " lines from the bottom
-set scrolloff=8
+set scrolloff=2
 
 " Disable encryption (:X)
 set key=
@@ -147,9 +142,6 @@ set clipboard+=unnamed
 " Automatically read a file that has changed on disk
 set autoread
 
-" reload the vimrc once it's saved
-au! BufWritePost $MYVIMRC source $MYVIMRC
-
 " map escape to ;;
 map! ;; <Esc> " map ;; to Esc
 vmap ;; <Esc> " map ;; to Esc in visual
@@ -169,7 +161,7 @@ nmap <silent> ,md :!mkdir -p %:p:h<CR>
 
 " Turn off that stupid highlight search
 nmap <silent> ,n :nohls<CR>
-
+set cpoptions+=$
 " Toggle the NERDTree
 map <leader>t :NERDTreeToggle<cr>
 "-----------------------------------------------------------------------------
@@ -212,7 +204,7 @@ set selectmode=key
 " set whichwrap=b,s,<,>,[,]
 set window=48
 " Show the line numbers
-" set number
+set number
 
 " Set the invisible characters
 set list
@@ -230,10 +222,14 @@ map <C-l> <C-w>l
 " let Tlist_Ctags_Cmd = "/usr/bin/ctags"
 let Tlist_WinWidth = 50
 map <F4> :TlistToggle<cr>
+"
 " load the vimrc file
 map <F11> :e $home/vim/_vimrc<cr>
-"" reload the vimrc once it's saved
+" commit the vimrc to github
+map <C-F11> :Git commit -a -m"commit"<cr>
+map <C-F10> :Git fetch<cr>"" reload the vimrc once it's saved
 au! BufWritePost $home/vim/_vimrc source $home/vim/_vimrc 
+"
 " filetype specific stuff
 " C / C++
 " au FileType python map <buffer> <leader>1 /class
@@ -246,6 +242,4 @@ inoremap { {}<Esc>i
 inoremap ( ()<Esc>i
 
 
-" commit the vimrc to github
-map <C-F11> :Git commit -a -m"commit"<cr>
 
