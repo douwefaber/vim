@@ -172,6 +172,9 @@ map <leader>t :NERDTreeToggle<cr>
 " set guifont=Lucida\ Console:h9
 " set guifont=DejaVu\ Sans\ Mono:h9
 set guifont=Consolas:h11
+" Increase and decrease font size
+nmap <silent> ,s :let &guifont = substitute(&guifont, ':h\(\d\+\)', '\=":h" . (submatch(1) - 1)', '')<CR>
+nmap <silent> ,b :let &guifont = substitute(&guifont, ':h\(\d\+\)', '\=":h" . (submatch(1) + 1)', '')<CR>
 
 " Set a nice colorscheme
 set background=dark
