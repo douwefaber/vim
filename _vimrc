@@ -226,7 +226,7 @@ map <F4> :TlistToggle<cr>
 " load the vimrc file
 map <F11> :e $home/vim/_vimrc<cr>
 " fetch my latest vimrc
-map <C-F10> :Git fetch<cr>"" reload the vimrc once it's saved
+map <C-F10> :Git fetch --all<cr>"" reload the vimrc once it's saved
 au! BufWritePost $home/vim/_vimrc source $home/vim/_vimrc 
 
 " commit the vimrc local
