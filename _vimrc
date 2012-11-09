@@ -226,7 +226,7 @@ map <F4> :TlistToggle<cr>
 " load the vimrc file
 map <F11> :e $home/vim/_vimrc<cr>
 " commit the vimrc to github
-map <C-F11> :Git commit -a -m"commit"<cr>
+map <C-F11> :Git commit --all -m"commit"<cr>
 map <C-F10> :Git fetch<cr>"" reload the vimrc once it's saved
 au! BufWritePost $home/vim/_vimrc source $home/vim/_vimrc 
 "
