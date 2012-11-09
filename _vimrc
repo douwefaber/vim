@@ -225,11 +225,12 @@ map <F4> :TlistToggle<cr>
 "
 " load the vimrc file
 map <F11> :e $home/vim/_vimrc<cr>
-" commit the vimrc to github
-map <C-F11> :Git commit --all -m"commit"<cr>
+" fetch my latest vimrc
 map <C-F10> :Git fetch<cr>"" reload the vimrc once it's saved
 au! BufWritePost $home/vim/_vimrc source $home/vim/_vimrc 
-"
+
+" commit the vimrc local
+map <C-F11> :Git commit --all -m"commit"<cr>:Git push<cr>
 " filetype specific stuff
 " C / C++
 " au FileType python map <buffer> <leader>1 /class
