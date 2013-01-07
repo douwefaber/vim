@@ -40,10 +40,10 @@ if has("gui_running")
 endif
 set colorcolumn=80 " set a colored column on this position
 
-" Tabstops are 4 spaces
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
+" Tabstops are 3 spaces
+set tabstop=3
+set shiftwidth=3
+set softtabstop=3
 set expandtab
 set autoindent
 
