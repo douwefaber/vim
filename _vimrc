@@ -16,12 +16,17 @@ Bundle 'msanders/snipmate.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'OmniCppComplete'
 Bundle 'kien/ctrlp.vim'
+" Bundle 'klen/python-mode'
+Bundle 'Lokaltog/vim-powerline'
 Bundle 'derekwyatt/vim-protodef'
 Bundle 'derekwyatt/vim-fswitch'
 Bundle 'clang-complete'
 " The GIT plugin
 Bundle 'tpope/vim-fugitive'
-" Also load some colorscheme from github
+" Syntastic
+Bundle 'scrooloose/syntastic'
+
+" " Also load some colorscheme from github
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'jnurmine/Zenburn'
 Bundle 'ciaranm/inkpot'
@@ -143,27 +148,24 @@ set clipboard+=unnamed
 set autoread
 
 " map escape to ;;
-map! ;; <Esc> " map ;; to Esc
-vmap ;; <Esc> " map ;; to Esc in visual
+inoremap jk <Esc>
+vnoremap jk <Esc>
 
 " System default for mappings is now the "," character
 let mapleader = ","
 
-" Wipe out all buffers
-nmap <silent> ,wa :1,9000bwipeout<cr>
-
 " Toggle paste mode
-nmap <silent> ,p :set invpaste<CR>:set paste?<CR>
+" nmap <silent> ,p :set invpaste<CR>:set paste?<CR>
 
 " cd to the directory containing the file in the buffer
-nmap <silent> ,cd :lcd %:h<CR>
-nmap <silent> ,md :!mkdir -p %:p:h<CR>
+nnoremap <silent> <leader>cd :lcd %:h<CR>
+nnoremap <silent> <leader>md :!mkdir -p %:p:h<CR>
 
 " Turn off that stupid highlight search
-nmap <silent> ,n :nohls<CR>
+nnoremap <silent> ,n :nohls<CR>
 set cpoptions+=$
 " Toggle the NERDTree
-map <leader>t :NERDTreeToggle<cr>
+nnoremap <leader>t :NERDTreeToggle<cr>
 "-----------------------------------------------------------------------------
 " => Colors and Fonts
 "-----------------------------------------------------------------------------
@@ -173,8 +175,8 @@ map <leader>t :NERDTreeToggle<cr>
 " set guifont=DejaVu\ Sans\ Mono:h9
 set guifont=Consolas:h11
 " Increase and decrease font size
-nmap <silent> ,s :let &guifont = substitute(&guifont, ':h\(\d\+\)', '\=":h" . (submatch(1) - 1)', '')<CR>
-nmap <silent> ,b :let &guifont = substitute(&guifont, ':h\(\d\+\)', '\=":h" . (submatch(1) + 1)', '')<CR>
+nnoremap <silent> ,s :let &guifont = substitute(&guifont, ':h\(\d\+\)', '\=":h" . (submatch(1) - 1)', '')<CR>
+nnoremap <silent> ,b :let &guifont = substitute(&guifont, ':h\(\d\+\)', '\=":h" . (submatch(1) + 1)', '')<CR>
 
 " Set a nice colorscheme
 set background=dark
@@ -185,11 +187,23 @@ colorscheme inkpot
 
 " Use the arrows to something usefull
 " Right for the next buffer, left for the previous buffer
-map <right> :bn<cr>
-map <left> :bp<cr>
+nnoremap <right> :bn<cr>
+nnoremap <left> :bp<cr>
+
+" Set bubble up / down
+nnoremap <leader>u ddkP
+nnoremap <leader>d ddjP
+
+" map the capital H and L to go to the begin / end of the line
+" nnoremap H 0
+" nnoremap L $
+
+" Convert word to uppercase while in insert mode
+inoremap <c-u> <esc> bviwUea
+inoremap <c-d> <esc> bviwuea
 
 " When pressing <leader>cd switch to the directory of the open buffer
-map <leader>cd :cd %:p:h<cr>
+nnoremap <leader>cd :cd %:p:h<cr>
 
 set backspace=indent,eol,start
 " Set the backup properties
@@ -217,36 +231,34 @@ set lcs+=trail:¬
 set lcs+=nbsp:·
 
 " Move through the windows
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 " let Tlist_Ctags_Cmd = "/usr/bin/ctags"
 let Tlist_WinWidth = 50
-map <F4> :TlistToggle<cr>
+nnoremap <F4> :TlistToggle<cr>
 "
 " load the vimrc file
-map <F11> :e $home/vim/_vimrc<cr>
+nnoremap <leader>ev :e $home/vim/_vimrc<cr>
 " fetch my latest vimrc
-map <C-F10> :Git pull --all<cr>"" reload the vimrc once it's saved
+nnoremap <C-F10> :Git pull --all<cr>"" reload the vimrc once it's saved
 au! BufWritePost $home/vim/_vimrc source $home/vim/_vimrc 
-
 " commit the vimrc local
-map <C-F11> :Git commit --all -m"commit"<cr>:Git push<cr>
+nnoremap <C-F11> :Git commit --all -m"commit"<cr>:Git push<cr>
+
+" OmniCppComplete needs a ctags database
+nnoremap <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
 " filetype specific stuff
 " C / C++
-" au FileType python map <buffer> <leader>1 /class
+autocmd FileType cpp nnoremap <buffer> <localleader>c I//
 
-" OmniCppComplete needs a ctags database
-map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
-"
-" Automatic closing braces.
-" Nice that it can be done but they're anoying.
-" inoremap [ []<Esc>i
-" inoremap { {}<Esc>i
-" inoremap ( ()<Esc>i
+" Python 
+autocmd FileType python nnoremap <buffer> <localleader>c I#
 
+" Abbreviations
+iabbrev @@ douwe.faber@xyleminc.com
 
 
