@@ -148,8 +148,8 @@ set clipboard+=unnamed
 set autoread
 
 " map escape to ;;
-inoremap ;; <Esc>
-vnoremap ;; <Esc>
+inoremap jk <Esc>
+vnoremap jk <Esc>
 
 " System default for mappings is now the "," character
 let mapleader = ","
@@ -158,8 +158,8 @@ let mapleader = ","
 " nmap <silent> ,p :set invpaste<CR>:set paste?<CR>
 
 " cd to the directory containing the file in the buffer
-nnoremap <silent> ,cd :lcd %:h<CR>
-nnoremap <silent> ,md :!mkdir -p %:p:h<CR>
+nnoremap <silent> <leader>cd :lcd %:h<CR>
+nnoremap <silent> <leader>md :!mkdir -p %:p:h<CR>
 
 " Turn off that stupid highlight search
 nnoremap <silent> ,n :nohls<CR>
@@ -193,6 +193,10 @@ nnoremap <left> :bp<cr>
 " Set bubble up / down
 nnoremap <leader>u ddkP
 nnoremap <leader>d ddjP
+
+" map the capital H and L to go to the begin / end of the line
+" nnoremap H 0
+" nnoremap L $
 
 " Convert word to uppercase while in insert mode
 inoremap <c-u> <esc> bviwUea
@@ -237,26 +241,24 @@ let Tlist_WinWidth = 50
 nnoremap <F4> :TlistToggle<cr>
 "
 " load the vimrc file
-nnoremap <F11> :e $home/vim/_vimrc<cr>
+nnoremap <leader>ev :e $home/vim/_vimrc<cr>
 " fetch my latest vimrc
 nnoremap <C-F10> :Git pull --all<cr>"" reload the vimrc once it's saved
 au! BufWritePost $home/vim/_vimrc source $home/vim/_vimrc 
-
 " commit the vimrc local
 nnoremap <C-F11> :Git commit --all -m"commit"<cr>:Git push<cr>
 
-" filetype specific stuff
-" C / C++
-" au FileType python map <buffer> <leader>1 /class
-
 " OmniCppComplete needs a ctags database
 nnoremap <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
-"
-" Automatic closing braces.
-" Nice that it can be done but they're anoying.
-" inoremap [ []<Esc>i
-" inoremap { {}<Esc>i
-" inoremap ( ()<Esc>i
 
+" filetype specific stuff
+" C / C++
+autocmd FileType cpp nnoremap <buffer> <localleader>c I//
+
+" Python 
+autocmd FileType python nnoremap <buffer> <localleader>c I#
+
+" Abbreviations
+iabbrev @@ douwe.faber@xyleminc.com
 
 
