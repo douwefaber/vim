@@ -17,7 +17,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'OmniCppComplete'
 Bundle 'kien/ctrlp.vim'
 " Bundle 'klen/python-mode'
-Bundle 'Lokaltog/vim-powerline'
+" Bundle 'Lokaltog/vim-powerline'
 Bundle 'derekwyatt/vim-protodef'
 Bundle 'derekwyatt/vim-fswitch'
 Bundle 'clang-complete'
@@ -73,7 +73,7 @@ set noswapfile
 " Set the status line the way i like it
 " set stl=%f\ %m\ %r%{fugitive#statusline()}\ Line:%l/%L[%p%%]\ Col:%v\ Buf:#%n\ [%b][0x%B]
 " set stl=%f\ Line:%l/%L[%p%%]\ Col:%v\ Buf:#%n\ [%b][0x%B]
-set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+" set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 
 " tell VIM to always put a status line in, even if there is only one window
 set laststatus=2
@@ -181,9 +181,9 @@ nnoremap <silent> ,b :let &guifont = substitute(&guifont, ':h\(\d\+\)', '\=":h" 
 " Set a nice colorscheme
 set background=dark
 " colorscheme solarized
-" colorscheme koehler
+colorscheme koehler
 " colorscheme zenburn
-colorscheme inkpot
+" colorscheme inkpot
 
 " Use the arrows to something usefull
 " Right for the next buffer, left for the previous buffer
@@ -237,7 +237,7 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 " let Tlist_Ctags_Cmd = "/usr/bin/ctags"
-let Tlist_WinWidth = 50
+let Tlist_WinWidth = 40
 nnoremap <F4> :TlistToggle<cr>
 "
 " load the vimrc file
@@ -254,6 +254,7 @@ nnoremap <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 " filetype specific stuff
 " C / C++
 autocmd FileType cpp nnoremap <buffer> <localleader>c I//
+nnoremap <leader>ef :args **/{*.c*,*.h*}<cr>
 
 " Python 
 autocmd FileType python nnoremap <buffer> <localleader>c I#
