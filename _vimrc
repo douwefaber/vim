@@ -210,7 +210,8 @@ set backspace=indent,eol,start
 " The default is backup off and writebackup on
 set nobackup
 set nowritebackup
-set diffexpr=MyDiff()
+:set diffexpr=
+" set diffexpr=MyDiff()
 set helplang=nl
 set ignorecase
 set keymodel=startsel,stopsel
@@ -240,7 +241,8 @@ nnoremap <C-l> <C-w>l
 let Tlist_WinWidth = 40
 nnoremap <F4> :TlistToggle<cr>
 "
-" load the vimrc file
+"eload the vimrc file
+"ad the vimrc once it's saved
 nnoremap <leader>ev :e $home/vim/_vimrc<cr>
 " fetch my latest vimrc
 nnoremap <C-F10> :Git pull --all<cr>"" reload the vimrc once it's saved
