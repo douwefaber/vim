@@ -16,6 +16,7 @@ Bundle 'msanders/snipmate.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'OmniCppComplete'
 Bundle 'kien/ctrlp.vim'
+Bundle 'vim-scripts/a.vim'
 " Bundle 'klen/python-mode'
 " Bundle 'Lokaltog/vim-powerline'
 Bundle 'derekwyatt/vim-protodef'
@@ -236,6 +237,8 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
+nnoremap <leader>m :A<CR>
 
 " let Tlist_Ctags_Cmd = "/usr/bin/ctags"
 let Tlist_WinWidth = 40
