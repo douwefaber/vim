@@ -107,6 +107,8 @@ set timeoutlen=300
 " Keep some stuff in the history
 set history=100
 
+" Foldmethods
+"set foldmethod=syntax
 " These commands open folds
 set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo
 
@@ -149,8 +151,8 @@ set clipboard+=unnamed
 set autoread
 
 " map escape to ;;
-inoremap jk <Esc>
-vnoremap jk <Esc>
+inoremap ;; <Esc>
+vnoremap ;; <Esc>
 
 " System default for mappings is now the "," character
 let mapleader = ","
@@ -261,6 +263,11 @@ nnoremap <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 autocmd FileType cpp nnoremap <buffer> <localleader>c I//
 nnoremap <leader>ef :args **/{*.c*,*.h*}<cr>
 
+" Use msbuild as our make tool
+set makeprg=msbuild\ /nologo\ /v:q\ /property:GenerateFullPaths=true
+" make the msbuild output readable for vim quickfix
+set errorformat=\ %#%f(%l\\\,%c):\ %m
+ 
 " Python 
 autocmd FileType python nnoremap <buffer> <localleader>c I#
 
