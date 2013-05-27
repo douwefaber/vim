@@ -1,4 +1,5 @@
-"Douwe's vimrc
+"eouwe's vimrc
+"ad the vimrc once it's saved
 "-----------------------------------------------------------------------------
 " Manage plugins through Vundle
 "-----------------------------------------------------------------------------
@@ -262,6 +263,10 @@ nnoremap <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 " C / C++
 autocmd FileType cpp nnoremap <buffer> <localleader>c I//
 nnoremap <leader>ef :args **/{*.c*,*.h*}<cr>
+
+" xml
+" if file is one line the indentation will no work
+nnoremap <leader>xml :s/>/>\r/g<cr>
 
 " Use msbuild as our make tool
 set makeprg=msbuild\ /nologo\ /v:q\ /property:GenerateFullPaths=true
