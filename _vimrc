@@ -1,5 +1,5 @@
-"eouwe's vimrc
-"ad the vimrc once it's saved
+"Douwe's vimrc
+"load the vimrc once it's saved
 "-----------------------------------------------------------------------------
 " Manage plugins through Vundle
 "-----------------------------------------------------------------------------
@@ -15,6 +15,9 @@ Bundle 'gmarik/vundle'
 "-----------------------------------------------------------------------------
 Bundle 'msanders/snipmate.vim'
 Bundle 'scrooloose/nerdtree'
+Bundle 'xolox/vim-misc'
+
+Bundle 'xolox/vim-shell'
 Bundle 'OmniCppComplete'
 Bundle 'kien/ctrlp.vim'
 Bundle 'vim-scripts/a.vim'
@@ -28,13 +31,12 @@ Bundle 'tpope/vim-fugitive'
 " Syntastic
 Bundle 'scrooloose/syntastic'
 
-" " Also load some colorscheme from github
+" Also load some colorscheme from github
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'jnurmine/Zenburn'
 Bundle 'ciaranm/inkpot'
-
 Bundle 'taglist.vim'
-"
+Bundle 'flazz/vim-colorschemes'
 " Set filetype stuff to on
 filetype on
 filetype plugin on
@@ -75,7 +77,7 @@ set noswapfile
 " Set the status line the way i like it
 " set stl=%f\ %m\ %r%{fugitive#statusline()}\ Line:%l/%L[%p%%]\ Col:%v\ Buf:#%n\ [%b][0x%B]
 " set stl=%f\ Line:%l/%L[%p%%]\ Col:%v\ Buf:#%n\ [%b][0x%B]
-" set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+ set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 
 " tell VIM to always put a status line in, even if there is only one window
 set laststatus=2
@@ -103,13 +105,15 @@ set virtualedit=all
 " "," key and the "d" key. If the "d" key isn't pressed before the
 " timeout expires, one of two things happens: The "," command is executed
 " if there is one (which there isn't) or the command aborts.
-set timeoutlen=300
+set timeoutlen=400
 
 " Keep some stuff in the history
 set history=100
 
-" Foldmethods
-"set foldmethod=syntax
+" Foldmethod
+set foldmethod=syntax
+nnoremap <space> za<cr>
+
 " These commands open folds
 set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo
 
@@ -184,8 +188,8 @@ nnoremap <silent> ,b :let &guifont = substitute(&guifont, ':h\(\d\+\)', '\=":h" 
 
 " Set a nice colorscheme
 set background=dark
-" colorscheme solarized
 colorscheme koehler
+" colorscheme solarized
 " colorscheme zenburn
 " colorscheme inkpot
 
@@ -261,6 +265,7 @@ nnoremap <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
 " filetype specific stuff
 " C / C++
+au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
 autocmd FileType cpp nnoremap <buffer> <localleader>c I//
 nnoremap <leader>ef :args **/{*.c*,*.h*}<cr>
 
