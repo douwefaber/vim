@@ -8,28 +8,52 @@ filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 " required!
+
 Bundle 'gmarik/vundle'
 
 "-----------------------------------------------------------------------------
 " My Bundles here:
 "-----------------------------------------------------------------------------
-Bundle 'msanders/snipmate.vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'xolox/vim-misc'
+" Autocompletion for the D language
+Bundle "Hackerpilot/DCD", {'rtp': 'editors/vim'}
 
-Bundle 'xolox/vim-shell'
-Bundle 'OmniCppComplete'
-Bundle 'kien/ctrlp.vim'
+" AutoCompletion popup
+Bundle 'AutoComplPop'
+
+" Change word in multiple places <C-n>
+Bundle 'terryma/vim-multiple-cursors'
+
+" File browser
+Bundle 'scrooloose/nerdtree'
+
+" Switch between implementation and header files
 Bundle 'vim-scripts/a.vim'
-" Bundle 'klen/python-mode'
-" Bundle 'Lokaltog/vim-powerline'
-Bundle 'derekwyatt/vim-protodef'
-Bundle 'derekwyatt/vim-fswitch'
-Bundle 'clang-complete'
+
 " The GIT plugin
 Bundle 'tpope/vim-fugitive'
-" Syntastic
+
+" Commenting out code gcc for one line gcap for a paragraph
+Bundle 'tpope/vim-commentary'
+
+" Visualizing markdown documents
+Bundle 'tpope/vim-markdown'
+
+" Syntax check for python
 Bundle 'scrooloose/syntastic'
+
+" Bundle 'msanders/snipmate.vim'
+" Bundle 'drmingdrmer/xptemplate'
+" Bundle 'xolox/vim-misc'
+" Bundle 'xolox/vim-shell'
+" Bundle 'OmniCppComplete'
+Bundle 'kien/ctrlp.vim'
+let g:ctrlp_map = '<c-p>'
+
+" Bundle 'klen/python-mode'
+" Bundle 'Lokaltog/vim-powerline'
+" Bundle 'derekwyatt/vim-protodef'
+" Bundle 'derekwyatt/vim-fswitch'
+" Bundle 'clang-complete'
 
 " Also load some colorscheme from github
 Bundle 'altercation/vim-colors-solarized'
@@ -37,11 +61,12 @@ Bundle 'jnurmine/Zenburn'
 Bundle 'ciaranm/inkpot'
 Bundle 'taglist.vim'
 Bundle 'flazz/vim-colorschemes'
+
 " Set filetype stuff to on
 filetype on
 filetype plugin on
 filetype indent on
-set nocp
+set nocp " Not compatible with the old vi
 
 " Maximize the window on startup
 if has("gui_running")
@@ -56,46 +81,29 @@ set softtabstop=3
 set expandtab
 set autoindent
 
-" set the search scan to wrap lines
-set wrapscan
-
-" set visual bell -- i hate that damned beeping
-set vb
-
-" Set show command (easier to learn vim)
-set sc " short for showcommand
+set wrapscan       " set the search scan to wrap lines
+set vb             " set visual bell -- i hate that damned beeping
+set sc             " set show command (easier to learn vim)
 
 " Make sure that unsaved buffers that are to be put in the background are
 " allowed to go in there (ie. the "must save first" error doesn't come up)
 set hidden
-
-" Do not store backup or temporary files
-set nobackup
+set nobackup       " do not store backup or temporary files
 set nowritebackup
 set noswapfile
 
 " Set the status line the way i like it
-" set stl=%f\ %m\ %r%{fugitive#statusline()}\ Line:%l/%L[%p%%]\ Col:%v\ Buf:#%n\ [%b][0x%B]
-" set stl=%f\ Line:%l/%L[%p%%]\ Col:%v\ Buf:#%n\ [%b][0x%B]
- set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+if has("statusline")
+ set statusline=%<%f\ %h%m%r%=%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %-18.(ln:%l/%L,col:%v%)\ [%b][0x%B]\ %P]
+endif
 
 " tell VIM to always put a status line in, even if there is only one window
 set laststatus=2
-
-" Show the current mode
-set showmode
-
-" Switch on syntax highlighting.
-syntax on
-
-" Hide the mouse pointer while typing
-set mousehide
-
-" set the gui options the way I like
-set guioptions=acg
-"
-" Set virtual edit so the cursor can go anywhere
-set virtualedit=all
+set showmode       " show the current mode
+syntax on          " switch on syntax highlighting.
+set mousehide      " hide the mouse pointer while typing
+set guioptions=acg " set the gui options the way I like
+set virtualedit=all " set virtual edit so the cursor can go anywhere
 
 " This is the timeout used while waiting for user input on a multi-keyed macro
 " or while just sitting and waiting for another key to be pressed measured
@@ -106,16 +114,20 @@ set virtualedit=all
 " timeout expires, one of two things happens: The "," command is executed
 " if there is one (which there isn't) or the command aborts.
 set timeoutlen=400
+set history=100    " keep some stuff in the history
 
-" Keep some stuff in the history
-set history=100
-
-" Foldmethod
+"------------------------------------------------------------------------------
+" Fold global settings
+"------------------------------------------------------------------------------
 set foldmethod=syntax
+set nofoldenable
+" space toggles fold
 nnoremap <space> za<cr>
 
 " These commands open folds
 set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo
+
+
 
 " When the page starts to scroll, keep the cursor n lines from the top and n
 " lines from the bottom
@@ -174,6 +186,11 @@ nnoremap <silent> ,n :nohls<CR>
 set cpoptions+=$
 " Toggle the NERDTree
 nnoremap <leader>t :NERDTreeToggle<cr>
+" toggle nowrap
+nnoremap <leader>w :set invwrap<cr>
+"Set fileencoding to latin1
+nnoremap <leader>l :set fileencoding=latin1<cr>
+
 "-----------------------------------------------------------------------------
 " => Colors and Fonts
 "-----------------------------------------------------------------------------
@@ -251,12 +268,12 @@ nnoremap <leader>m :A<CR>
 let Tlist_WinWidth = 40
 nnoremap <F4> :TlistToggle<cr>
 "
-"eload the vimrc file
-"ad the vimrc once it's saved
-nnoremap <leader>ev :e $home/vim/_vimrc<cr>
-" fetch my latest vimrc
-nnoremap <C-F10> :Git pull --all<cr>"" reload the vimrc once it's saved
+" Reload the vimrc file
+" Load the vimrc once it's saved
 au! BufWritePost $home/vim/_vimrc source $home/vim/_vimrc 
+" fetch my latest vimrc
+nnoremap <leader>ev :e $home/vim/_vimrc<cr>
+nnoremap <C-F10> :Git pull --all<cr>"" reload the vimrc once it's saved
 " commit the vimrc local
 nnoremap <C-F11> :Git commit --all -m"commit"<cr>:Git push<cr>
 
@@ -264,24 +281,39 @@ nnoremap <C-F11> :Git commit --all -m"commit"<cr>:Git push<cr>
 nnoremap <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
 " filetype specific stuff
+" ----------------------------------------------------------------------------
 " C / C++
-au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
-autocmd FileType cpp nnoremap <buffer> <localleader>c I//
-nnoremap <leader>ef :args **/{*.c*,*.h*}<cr>
+" ----------------------------------------------------------------------------
 
-" xml
+autocmd BufNewFile,BufRead,BufEnter *.cpp,*.hpp,*.h set omnifunc=omni#cpp#complete#Main
+autocmd FileType cpp nnoremap <buffer> <localleader>c I//
+" Load all CPP files in current directory
+nnoremap <leader>ef :args **/{*.c*,*.h*}<cr>
+" Use msbuild as our make tool
+autocmd FileType cpp setlocal makeprg=build.cmd
+" make the msbuild output readable for vim quickfix
+set errorformat=\ %#%f(%l\\\,%c):\ %m
+
+" ----------------------------------------------------------------------------
+" XML
+" ----------------------------------------------------------------------------
 " if file is one line the indentation will no work
 nnoremap <leader>xml :s/>/>\r/g<cr>
 
-" Use msbuild as our make tool
-set makeprg=msbuild\ /nologo\ /v:q\ /property:GenerateFullPaths=true
-" make the msbuild output readable for vim quickfix
-set errorformat=\ %#%f(%l\\\,%c):\ %m
- 
+" ----------------------------------------------------------------------------
 " Python 
+" ----------------------------------------------------------------------------
 autocmd FileType python nnoremap <buffer> <localleader>c I#
 
+" ----------------------------------------------------------------------------
+" D
+" ----------------------------------------------------------------------------
+autocmd BufNewFile,BufRead,BufEnter *.d set omnifunc=dcomplete#Complete
+let g:dcd_importPath=['C:\D\dmd2\src\phobos\std', 'C:\D\dmd2\src\druntime\import']
+
+" ----------------------------------------------------------------------------
 " Abbreviations
+" ----------------------------------------------------------------------------
 iabbrev @@ douwe.faber@xyleminc.com
 
 
