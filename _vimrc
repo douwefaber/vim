@@ -272,10 +272,10 @@ nnoremap <F4> :TlistToggle<cr>
 " Load the vimrc once it's saved
 au! BufWritePost $home/vim/_vimrc source $home/vim/_vimrc 
 " fetch my latest vimrc
-nnoremap <leader>ev :e $home/vim/_vimrc<cr>
-nnoremap <C-F10> :Git pull --all<cr>"" reload the vimrc once it's saved
+nnoremap <leader>ev :e $home/vim/_vimrc<CR>
+nnoremap <C-F10> :Git pull origin master<CR>"" reload the vimrc once it's saved
 " commit the vimrc local
-nnoremap <C-F11> :Git commit --all -m"commit"<cr>:Git push<cr>
+nnoremap <C-F11> :Git commit --all -m"commit"<CR>:Git push<CR>
 
 " OmniCppComplete needs a ctags database
 nnoremap <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
@@ -289,7 +289,7 @@ nnoremap <F6> :!unittest.cmd<CR>
 
 autocmd BufNewFile,BufRead,BufEnter *.cpp,*.hpp,*.h set omnifunc=omni#cpp#complete#Main
 " Load all CPP files in current directory
-nnoremap <leader>ef :args **/{*.c*,*.h*}<cr>
+nnoremap <leader>ef :args **/{*.c*,*.h*}<CR>
 " Use msbuild as our make tool
 autocmd FileType *.cpp,*.hpp,*.h nnoremap <buffer> <C-F5> :!./build.cmd<CR>
 " make the msbuild output readable for vim quickfix
@@ -299,7 +299,7 @@ set errorformat=\ %#%f(%l\\\,%c):\ %m
 " XML
 " ----------------------------------------------------------------------------
 " if file is one line the indentation will no work
-nnoremap <leader>xml :s/>/>\r/g<cr>
+nnoremap <leader>xml :s/>/>\r/g<CR>
 
 " ----------------------------------------------------------------------------
 " Python 
