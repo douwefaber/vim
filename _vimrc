@@ -284,13 +284,14 @@ nnoremap <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 " ----------------------------------------------------------------------------
 " C / C++
 " ----------------------------------------------------------------------------
+nnoremap <F5> :!build.cmd<CR>
+nnoremap <F6> :!unittest.cmd<CR>
 
 autocmd BufNewFile,BufRead,BufEnter *.cpp,*.hpp,*.h set omnifunc=omni#cpp#complete#Main
-autocmd FileType cpp nnoremap <buffer> <localleader>c I//
 " Load all CPP files in current directory
 nnoremap <leader>ef :args **/{*.c*,*.h*}<cr>
 " Use msbuild as our make tool
-autocmd FileType cpp setlocal makeprg=build.cmd
+autocmd FileType *.cpp,*.hpp,*.h nnoremap <buffer> <C-F5> :!./build.cmd<CR>
 " make the msbuild output readable for vim quickfix
 set errorformat=\ %#%f(%l\\\,%c):\ %m
 
