@@ -59,7 +59,7 @@ let g:ctrlp_map = '<c-p>'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'jnurmine/Zenburn'
 Bundle 'ciaranm/inkpot'
-Bundle 'taglist.vim'
+" Bundle 'taglist.vim'
 Bundle 'flazz/vim-colorschemes'
 
 " Set filetype stuff to on
@@ -265,8 +265,8 @@ nnoremap <C-l> <C-w>l
 nnoremap <leader>m :A<CR>
 
 " let Tlist_Ctags_Cmd = "/usr/bin/ctags"
-let Tlist_WinWidth = 40
-nnoremap <F4> :TlistToggle<cr>
+" let Tlist_WinWidth = 40
+" nnoremap <F4> :TlistToggle<cr>
 "
 " Reload the vimrc file
 " Load the vimrc once it's saved
@@ -278,7 +278,7 @@ nnoremap <C-F10> :Git pull origin master<CR>"" reload the vimrc once it's saved
 nnoremap <C-F11> :Git commit --all -m"commit"<CR>:Git push<CR>
 
 " OmniCppComplete needs a ctags database
-nnoremap <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+" nnoremap <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
 " filetype specific stuff
 " ----------------------------------------------------------------------------
