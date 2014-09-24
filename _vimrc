@@ -15,10 +15,10 @@ Bundle 'gmarik/vundle'
 " My Bundles here:
 "-----------------------------------------------------------------------------
 " Autocompletion for the D language
-Bundle "Hackerpilot/DCD", {'rtp': 'editors/vim'}
+" Bundle "Hackerpilot/DCD", {'rtp': 'editors/vim'}
 
 " AutoCompletion popup
-Bundle 'AutoComplPop'
+" Bundle 'AutoComplPop'
 
 " Change word in multiple places <C-n>
 Bundle 'terryma/vim-multiple-cursors'
