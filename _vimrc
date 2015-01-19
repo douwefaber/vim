@@ -274,9 +274,10 @@ au! BufWritePost $home/vim/_vimrc source $home/vim/_vimrc
 " fetch my latest vimrc
 nnoremap <leader>ev :e $home/vim/_vimrc<CR>
 nnoremap <C-F10> :Git pull origin master<CR>"" reload the vimrc once it's saved
-" commit the vimrc local
+" commit the vimrc local and push it to github
 nnoremap <C-F11> :Git commit --all -m"commit"<CR>:Git push<CR>
 
+nnoremap <leader>n Go<CR>Onderwerp:<CR>Binnengekomen:<CR>Datum:<CR>Tijd: van tot<CR>Aangenomen door:<CR>Behandeld door:<CR><ESC>
 " OmniCppComplete needs a ctags database
 " nnoremap <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
@@ -316,5 +317,3 @@ let g:dcd_importPath=['C:\D\dmd2\src\phobos\std', 'C:\D\dmd2\src\druntime\import
 " Abbreviations
 " ----------------------------------------------------------------------------
 iabbrev @@ douwe.faber@xyleminc.com
-
-
