@@ -264,6 +264,9 @@ nnoremap <C-l> <C-w>l
 
 nnoremap <leader>m :A<CR>
 
+nnoremap <leader>h :%!xxd<CR>
+nnoremap <leader>H :%!xxd -r<CR>
+
 " let Tlist_Ctags_Cmd = "/usr/bin/ctags"
 " let Tlist_WinWidth = 40
 " nnoremap <F4> :TlistToggle<cr>
