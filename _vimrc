@@ -14,11 +14,9 @@ Bundle 'gmarik/vundle'
 "-----------------------------------------------------------------------------
 " My Bundles here:
 "-----------------------------------------------------------------------------
-" Autocompletion for the D language
-" Bundle "Hackerpilot/DCD", {'rtp': 'editors/vim'}
 
-" AutoCompletion popup
-" Bundle 'AutoComplPop'
+" Dispatch
+Bundle 'tpope/vim-dispatch'
 
 " Change word in multiple places <C-n>
 Bundle 'terryma/vim-multiple-cursors'
@@ -34,9 +32,6 @@ Bundle 'tpope/vim-fugitive'
 
 " Commenting out code gcc for one line gcap for a paragraph
 Bundle 'tpope/vim-commentary'
-
-" Visualizing markdown documents
-Bundle 'tpope/vim-markdown'
 
 " Syntax check for python
 Bundle 'scrooloose/syntastic'
@@ -205,10 +200,10 @@ nnoremap <silent> ,b :let &guifont = substitute(&guifont, ':h\(\d\+\)', '\=":h" 
 
 " Set a nice colorscheme
 set background=dark
-colorscheme koehler
+" colorscheme koehler
 " colorscheme solarized
 " colorscheme zenburn
-" colorscheme inkpot
+colorscheme inkpot
 
 " Use the arrows to something usefull
 " Right for the next buffer, left for the previous buffer
@@ -288,16 +283,22 @@ nnoremap <leader>n Go<CR>Onderwerp:<CR>Binnengekomen:<CR>Datum:<CR>Tijd: van tot
 " ----------------------------------------------------------------------------
 " C / C++
 " ----------------------------------------------------------------------------
-nnoremap <F5> :!build.cmd<CR>
+" nnoremap <silent> <leader>cd :lcd %:h<CR>
+
+set makeprg=build.cmd
+set errorformat=\ %#%f(%l)\ :\ %#%t%[A-z]%#\ %[A-Z\ ]%#%n:\ %m
+" set errorformat+=%*\\d>%f(%l)\ :\ %t%[A-z]%#\ %m
+" set errorformat+=\ %#%f(%l)\ :\ %#%t%[A-z]%#\ %m
+" set errorformat+z=%f(%l,%c):\ error\ %n:\ %f
+nnoremap <F5> :Make<CR>
 nnoremap <F6> :!unittest.cmd<CR>
+nnoremap <leader>n :cn<CR>
 
 autocmd BufNewFile,BufRead,BufEnter *.cpp,*.hpp,*.h set omnifunc=omni#cpp#complete#Main
+autocmd FileType *.cpp,*.hpp,*.h nnoremap <buffer> <C-F5> :!./build.cmd<CR>
 " Load all CPP files in current directory
 nnoremap <leader>ef :args **/{*.c*,*.h*}<CR>
 " Use msbuild as our make tool
-autocmd FileType *.cpp,*.hpp,*.h nnoremap <buffer> <C-F5> :!./build.cmd<CR>
-" make the msbuild output readable for vim quickfix
-set errorformat=\ %#%f(%l\\\,%c):\ %m
 
 " ----------------------------------------------------------------------------
 " XML
@@ -311,12 +312,7 @@ nnoremap <leader>xml :s/>/>\r/g<CR>
 autocmd FileType python nnoremap <buffer> <localleader>c I#
 
 " ----------------------------------------------------------------------------
-" D
-" ----------------------------------------------------------------------------
-autocmd BufNewFile,BufRead,BufEnter *.d set omnifunc=dcomplete#Complete
-let g:dcd_importPath=['C:\D\dmd2\src\phobos\std', 'C:\D\dmd2\src\druntime\import']
-
-" ----------------------------------------------------------------------------
 " Abbreviations
 " ----------------------------------------------------------------------------
 iabbrev @@ douwe.faber@xyleminc.com
+
