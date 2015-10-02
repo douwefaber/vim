@@ -293,6 +293,7 @@ set errorformat=\ %#%f(%l)\ :\ %#%t%[A-z]%#\ %[A-Z\ ]%#%n:\ %m
 nnoremap <F5> :Make<CR>
 nnoremap <F6> :!unittest.cmd<CR>
 nnoremap <leader>n :cn<CR>
+nnoremap <F7> :!dot.exe -Tsvg -o %:r.svg %:p<CR>
 
 autocmd BufNewFile,BufRead,BufEnter *.cpp,*.hpp,*.h set omnifunc=omni#cpp#complete#Main
 autocmd FileType *.cpp,*.hpp,*.h nnoremap <buffer> <C-F5> :!./build.cmd<CR>
